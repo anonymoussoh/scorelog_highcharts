@@ -1,4 +1,4 @@
-Freeciv Scorelog Viewer By HighChart
+Freeciv Scorelog Viewer By HighCharts
 =========
 
  * This is still alpha version.
