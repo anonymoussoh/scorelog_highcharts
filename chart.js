@@ -1,21 +1,14 @@
 
-//データ処理
 var global_playerlist;
 var global_turn;
 var title_name;
 function change(ev){
-   $('li').removeClass('selected');
-     
-//   document.getElementById('graph').innerText = "";
+    $('li').removeClass('selected');
 	
 	var files=ev.target.files;
 	
 	var file=files[0];
 	if(!file)return;
-	/*
-    var titleelement = document.getElementById('filename');
-    titleelement.childNodes.item(0).nodeValue = file.name;
-    */
     title_name = file.name;
     
     var playerlist = {};
@@ -76,8 +69,8 @@ function change(ev){
 	reader.readAsText(file);
 }
 
-
-//チャートプロセス
+//以上データ処理
+//以下チャートプロセス
 var chart1; // globally available
 
 $('li').click(function() {
