@@ -1,14 +1,17 @@
 Freeciv Scorelog Viewer By HighCharts
 =========
 
- * This is still alpha version.
- * Japanese Only
+ * This is still alpha version, but fork freely !
+ * Language : Japanese
  
-Require
+Requirement
 ---------------------------------
  * HTML File API
  * jQuery
  * Highcharts
  
  
- * License : Highcharts requires non-commercial use.
+License
+---------------------------------
+ This program is licensed under [NYSL Version 0.9982](http://www.kmonos.net/nysl/index.en.html).
+ Highcharts is free in non-commercial use.
