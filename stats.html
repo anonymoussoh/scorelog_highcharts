@@ -1,63 +1,63 @@
 <!doctype html>
 <html lang='ja'>
-<head>
-<meta charset="utf-8">
-<title>Freeciv Score Viewer</title>
+ <head>
+  <meta charset="utf-8">
+  <title>Freeciv Score Viewer</title>
 
-<link rel="stylesheet" type="text/css" href="design.css">
-<script src="jquery-1.10.2.min.js" type="text/javascript"></script>
-<script src="highcharts.js" type="text/javascript"></script>
-<!--<script src="highcharts3.0.7.js" type="text/javascript"></script>-->
-<script src="exporting.js" type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="design.css">
 
-</head>
-<body lang='ja'>
+  <script src="jquery-1.10.2.min.js" type="text/javascript"></script>
+  <script src="highcharts.js" type="text/javascript"></script>
+  <script src="exporting.js" type="text/javascript"></script>
 
-<div id='frame'>
-<div id='file_selecter'>
-<span id='title'>Freeciv Score Viewer</span>
-<input type="file" onchange="change(event)">｜←こちらからファイルを選択してください。
-</div>
- <div id='listbox'>
-  <ul>
-   <li>総人口</li>
-   <li>BNP</li>
-   <li>生産力</li>
-   <li>都市数</li>
-   <li>科学技術</li>
-   <li>保有ユニット</li>
-   <li>開拓者</li>
-   <li>不思議</li>
-   <li>研究速度</li>
-   <li>国土面積</li>
-   <li>入植面積</li>
-   <li>公害</li>
-   <li>読み書き</li>
-   <li>宇宙船</li>
-   <li>国庫金</li>
-   <li>税</li>
-   <li>科学</li>
-   <li>贅沢</li>
-   <li>混乱</li>
-   <li>幸福市民</li>
-   <li>平静市民</li>
-   <li>不幸市民</li>
-   <li>専門家</li>
-   <li>政治体制</li>
-   <li>汚職</li>
-   <li>スコア</li>
-   <li>総製造数</li>
-   <li>総撃破数</li>
-   <li>総被撃破数</li>
-  </ul>
- </div>
- <div id='graph'>
+ </head>
+ <body lang='ja'>
+
+  <div id='frame'>
+   <div id='file_selecter'>
+    <span id='title'>Freeciv Score Viewer</span>
+    <input type="file" onchange="change(event)">｜←こちらからファイルを選択してください。
+   </div>
+  <div id='listbox'>
+   <ul>
+    <li>総人口</li>
+    <li>BNP</li>
+    <li>生産力</li>
+    <li>都市数</li>
+    <li>科学技術</li>
+    <li>保有ユニット</li>
+    <li>開拓者</li>
+    <li>不思議</li>
+    <li>研究速度</li>
+    <li>国土面積</li>
+    <li>入植面積</li>
+    <li>公害</li>
+    <li>読み書き</li>
+    <li>宇宙船</li>
+    <li>国庫金</li>
+    <li>税</li>
+    <li>科学</li>
+    <li>贅沢</li>
+    <li>混乱</li>
+    <li>幸福市民</li>
+    <li>平静市民</li>
+    <li>不幸市民</li>
+    <li>専門家</li>
+    <li>政治体制</li>
+    <li>汚職</li>
+    <li>スコア</li>
+    <li>総製造数</li>
+    <li>総撃破数</li>
+    <li>総被撃破数</li>
+   </ul>
+  </div>
+  <div id='graph'>
  
+  </div>
  </div>
-</div>
-<p id='float_clear'>
-Copyright Soh 2012 Some rights reserved.
-</p>
-</body>
+ <p id='float_clear'>
+ Copyright Soh 2012 Some rights reserved.
+ </p>
+ </body>
 </html>
 <script src="chart.js" type="text/javascript"></script>

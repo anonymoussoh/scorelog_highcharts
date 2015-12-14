@@ -10,7 +10,9 @@ function change(ev){
 	var file=files[0];
 	if(!file)return;
     title_name = file.name;
+   
     
+    //実データが入るプレイヤーリストはオブジェクトを指定
     var playerlist = {};
     var turn = [];
     
@@ -21,34 +23,55 @@ function change(ev){
       var taglist = [];
       for(var currentnumber = 0; currentnumber < maxline ; currentnumber++){
        var data_strip = result[currentnumber].split(' ');
-       
+        
+        //プレイヤー情報の追加
         if(data_strip[0] === 'addplayer'){
         playerlist[data_strip[2]] = {'name' : data_strip[3]};
         }
         
+        //タグ情報の追加
         if(data_strip[0] === 'tag'){
         taglist.push(data_strip[2]);
         }
         
+        //ターン情報の追加
         if(data_strip[0] === 'turn'){
         turn.push(data_strip[1]);
         }
         
+        //実データの追加
         if(data_strip[0] === 'data'){
+         
+         //タグリストの長さによって収めるべき実データのカラムの数が変わる。
          var taglist_length = taglist.length;
+          
+          //タグの種類ごとに照合をかける
           for(var current_tag = 0; current_tag < taglist_length; current_tag++){
+           
+           //現在のデータストリップのタグと現在照合をかけているタグが一致
            if(data_strip[2] == current_tag){
+           
+            //まだ追加されていないかどうか
+            //追加されていない場合、配列を設定
             if(!playerlist[data_strip[3]][taglist[current_tag]]){
             playerlist[data_strip[3]][taglist[current_tag]] = {};
             }
+            
+           //実データをplayerlist->playernumber（数値）->tagname（文字列）->turnnumber（数値）に格納
+           //parseIntは保険で数値保証
            playerlist[data_strip[3]][taglist[current_tag]][data_strip[1]] = parseInt(data_strip[4]);
            }
           }
         }
         
       }
+    
+    //ターン配列の長さで最終ターンを算出
     var lastturn = turn.length;
+    console.log(playerlist);
+    //playerlistはオブジェクトなのでfor-in文がまわる
     for(var current_player_pos in playerlist){
+     console.log(current_player_pos);
      for(var current_tag_name in playerlist[current_player_pos]){
       if(current_tag_name === 'name'){
       continue;
@@ -122,7 +145,8 @@ $('li').click(function() {
             title: {
                text: 'Score'
             },
-            min:0
+            min:0,
+            allowDecimals:false
          },
          series: dataseries
          }
