@@ -4,68 +4,72 @@ var global_turn;
 var title_name;
 function change(ev){
     $('li').removeClass('selected');
-	
+
 	var files=ev.target.files;
-	
+
 	var file=files[0];
 	if(!file)return;
     title_name = file.name;
-   
-    
+
+
     //実データが入るプレイヤーリストはオブジェクトを指定
     var playerlist = {};
     var turn = [];
     
+    //ファイル読み込み
 	var reader=new FileReader();
 	reader.onload=function(e){
-      var result = reader.result.split('\r\n');
+	  //ファイルを行ごとに分割して配列化
+      var result = reader.result.split('\n');
       var maxline = result.length;
       var taglist = [];
       for(var currentnumber = 0; currentnumber < maxline ; currentnumber++){
-       var data_strip = result[currentnumber].split(' ');
-        
+       //\r除去のためjQueryのTrimで対処
+       var each_line = $.trim(result[currentnumber]);
+       var data_strip = each_line.split(' ');
+
         //プレイヤー情報の追加
         if(data_strip[0] === 'addplayer'){
         playerlist[data_strip[2]] = {'name' : data_strip[3]};
         }
-        
+
         //タグ情報の追加
         if(data_strip[0] === 'tag'){
         taglist.push(data_strip[2]);
         }
-        
+
         //ターン情報の追加
         if(data_strip[0] === 'turn'){
         turn.push(data_strip[1]);
         }
-        
+
         //実データの追加
         if(data_strip[0] === 'data'){
-         
+
          //タグリストの長さによって収めるべき実データのカラムの数が変わる。
          var taglist_length = taglist.length;
-          
+
           //タグの種類ごとに照合をかける
           for(var current_tag = 0; current_tag < taglist_length; current_tag++){
-           
+
            //現在のデータストリップのタグと現在照合をかけているタグが一致
            if(data_strip[2] == current_tag){
-           
+
             //まだ追加されていないかどうか
             //追加されていない場合、配列を設定
             if(!playerlist[data_strip[3]][taglist[current_tag]]){
             playerlist[data_strip[3]][taglist[current_tag]] = {};
             }
-            
+
            //実データをplayerlist->playernumber（数値）->tagname（文字列）->turnnumber（数値）に格納
            //parseIntは保険で数値保証
            playerlist[data_strip[3]][taglist[current_tag]][data_strip[1]] = parseInt(data_strip[4]);
            }
           }
         }
-        
+
       }
-    
+
     //ターン配列の長さで最終ターンを算出
     var lastturn = turn.length;
     console.log(playerlist);
