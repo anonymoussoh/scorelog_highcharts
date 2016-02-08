@@ -19,7 +19,7 @@ function change(ev){
     //ファイル読み込み
 	var reader=new FileReader();
 	reader.onload=function(e){
-	  //ファイルを行ごとに分割して配列化
+      //ファイルを行ごとに分割して配列化
       var result = reader.result.split('\n');
       var maxline = result.length;
       var taglist = [];
@@ -27,6 +27,7 @@ function change(ev){
        //\r除去のためjQueryのTrimで対処
        var each_line = $.trim(result[currentnumber]);
        var data_strip = each_line.split(' ');
+
 
         //プレイヤー情報の追加
         if(data_strip[0] === 'addplayer'){
@@ -72,21 +73,26 @@ function change(ev){
 
     //ターン配列の長さで最終ターンを算出
     var lastturn = turn.length;
-    console.log(playerlist);
+//    console.log(playerlist);
     //playerlistはオブジェクトなのでfor-in文がまわる
     for(var current_player_pos in playerlist){
-     console.log(current_player_pos);
+//     console.log(current_player_pos);
      for(var current_tag_name in playerlist[current_player_pos]){
       if(current_tag_name === 'name'){
       continue;
       }
+     //一時配列
      var array = [];
+      //forで最終ターンの数値までカウントアップ。
       for(var current_turn = 0; current_turn < lastturn; current_turn++){
+       //該当ターンに数値がない場合ゼロをセット。内戦AIや途中からのログ書き出しへの対策。
        if(!playerlist[current_player_pos][current_tag_name][current_turn]){
        playerlist[current_player_pos][current_tag_name][current_turn] = 0;
        }
+      //数値をセット。
       array.push(playerlist[current_player_pos][current_tag_name][current_turn]);
      }
+     //一時配列を正式にセット。
      playerlist[current_player_pos][current_tag_name] = array;
      }
     }
