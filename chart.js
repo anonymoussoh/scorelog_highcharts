@@ -12,58 +12,59 @@ function change(ev){
     title_name = file.name;
 
 
-    //実データが入るプレイヤーリストはオブジェクトを指定
+    //Defile playerlist object to store actual data
     var playerlist = {};
     var turn = [];
     
-    //ファイル読み込み
+    //Read file
 	var reader=new FileReader();
 	reader.onload=function(e){
-      //ファイルを行ごとに分割して配列化
+      //Make array by splitting file
       var result = reader.result.split('\n');
       var maxline = result.length;
       var taglist = [];
+      //Map each row
       for(var currentnumber = 0; currentnumber < maxline ; currentnumber++){
-       //\r除去のためjQueryのTrimで対処
+       //Remove \r by jQuery's trim
        var each_line = $.trim(result[currentnumber]);
        var data_strip = each_line.split(' ');
 
 
-        //プレイヤー情報の追加
+        //Add player info
         if(data_strip[0] === 'addplayer'){
         playerlist[data_strip[2]] = {'name' : data_strip[3]};
         }
 
-        //タグ情報の追加
+        //Add tag info
         if(data_strip[0] === 'tag'){
         taglist.push(data_strip[2]);
         }
 
-        //ターン情報の追加
+        //Add turn info
         if(data_strip[0] === 'turn'){
         turn.push(data_strip[1]);
         }
 
-        //実データの追加
+        //Add actual data
         if(data_strip[0] === 'data'){
 
-         //タグリストの長さによって収めるべき実データのカラムの数が変わる。
+         //The number of column of actual data to store depends on the length of tag list.
          var taglist_length = taglist.length;
 
-          //タグの種類ごとに照合をかける
+          //Current data strip tag meets which tag type?
           for(var current_tag = 0; current_tag < taglist_length; current_tag++){
 
-           //現在のデータストリップのタグと現在照合をかけているタグが一致
+           //Current data strip tag meets correct tag type !
            if(data_strip[2] == current_tag){
 
-            //まだ追加されていないかどうか
-            //追加されていない場合、配列を設定
+            //Is it already added ?
+            //If not, define object
             if(!playerlist[data_strip[3]][taglist[current_tag]]){
             playerlist[data_strip[3]][taglist[current_tag]] = {};
             }
 
-           //実データをplayerlist->playernumber（数値）->tagname（文字列）->turnnumber（数値）に格納
-           //parseIntは保険で数値保証
+           //Store actual data to playerlist->playernumber[num]->tagname[string]->turnnumber[num]
+           //To make sure, parseInt.
            playerlist[data_strip[3]][taglist[current_tag]][data_strip[1]] = parseInt(data_strip[4]);
            }
           }
@@ -71,28 +72,28 @@ function change(ev){
 
       }
 
-    //ターン配列の長さで最終ターンを算出
+    //Calculate last turn by length of turn array
     var lastturn = turn.length;
 //    console.log(playerlist);
-    //playerlistはオブジェクトなのでfor-in文がまわる
+    //Use for-in because "playerlist" is object
     for(var current_player_pos in playerlist){
 //     console.log(current_player_pos);
      for(var current_tag_name in playerlist[current_player_pos]){
       if(current_tag_name === 'name'){
       continue;
       }
-     //一時配列
+     //temporary array
      var array = [];
-      //forで最終ターンの数値までカウントアップ。
+      //Count up until the number of last turn by "for"
       for(var current_turn = 0; current_turn < lastturn; current_turn++){
-       //該当ターンに数値がない場合ゼロをセット。内戦AIや途中からのログ書き出しへの対策。
+       //Set ZERO when current turn data is absent. For civil war AI and incomplete log.
        if(!playerlist[current_player_pos][current_tag_name][current_turn]){
        playerlist[current_player_pos][current_tag_name][current_turn] = 0;
        }
-      //数値をセット。
+      //Set number
       array.push(playerlist[current_player_pos][current_tag_name][current_turn]);
      }
-     //一時配列を正式にセット。
+     //Set temporary array to "playerlist"
      playerlist[current_player_pos][current_tag_name] = array;
      }
     }
@@ -102,8 +103,8 @@ function change(ev){
 	reader.readAsText(file);
 }
 
-//以上データ処理
-//以下チャートプロセス
+//Above is data process
+//Below is chart rendering process
 var chart1; // globally available
 
 $('li').click(function() {
