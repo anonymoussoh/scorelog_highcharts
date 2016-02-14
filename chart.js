@@ -154,7 +154,7 @@ $('li').click(function() {
          yAxis:
          {
             title: {
-               text: 'Score'
+               text: 'Point'
             },
             min:0,
             allowDecimals:false
