@@ -11,11 +11,10 @@ function change(ev){
 	if(!file)return;
     title_name = file.name;
 
-
     //Defile playerlist object to store actual data
     var playerlist = {};
     var turn = [];
-    
+
     //Read file
 	var reader=new FileReader();
 	reader.onload=function(e){
@@ -25,10 +24,8 @@ function change(ev){
       var taglist = [];
       //Map each row
       for(var currentnumber = 0; currentnumber < maxline ; currentnumber++){
-       //Remove \r by jQuery's trim
-       var each_line = $.trim(result[currentnumber]);
-       var data_strip = each_line.split(' ');
-
+       //Remove \r by trim
+       var data_strip = result[currentnumber].trim().split(' ');
 
         //Add player info
         if(data_strip[0] === 'addplayer'){
@@ -47,56 +44,19 @@ function change(ev){
 
         //Add actual data
         if(data_strip[0] === 'data'){
-
-         //The number of column of actual data to store depends on the length of tag list.
-         var taglist_length = taglist.length;
-
-          //Current data strip tag meets which tag type?
-          for(var current_tag = 0; current_tag < taglist_length; current_tag++){
-
-           //Current data strip tag meets correct tag type !
-           if(data_strip[2] == current_tag){
-
+            var current_tag = taglist[data_strip[2]];
             //Is it already added ?
             //If not, define object
-            if(!playerlist[data_strip[3]][taglist[current_tag]]){
-            playerlist[data_strip[3]][taglist[current_tag]] = {};
+            if(!playerlist[data_strip[3]][current_tag]){
+                playerlist[data_strip[3]][current_tag] = [];
+                playerlist[data_strip[3]][current_tag] = turn.map(function(){return 0;});
+                playerlist[data_strip[3]][current_tag].pop();
             }
-
-           //Store actual data to playerlist->playernumber[num]->tagname[string]->turnnumber[num]
-           //To make sure, parseInt.
-           playerlist[data_strip[3]][taglist[current_tag]][data_strip[1]] = parseInt(data_strip[4]);
-           }
-          }
+            playerlist[data_strip[3]][current_tag].push(parseInt(data_strip[4],10));
         }
 
       }
 
-    //Calculate last turn by length of turn array
-    var lastturn = turn.length;
-//    console.log(playerlist);
-    //Use for-in because "playerlist" is object
-    for(var current_player_pos in playerlist){
-//     console.log(current_player_pos);
-     for(var current_tag_name in playerlist[current_player_pos]){
-      if(current_tag_name === 'name'){
-      continue;
-      }
-     //temporary array
-     var array = [];
-      //Count up until the number of last turn by "for"
-      for(var current_turn = 0; current_turn < lastturn; current_turn++){
-       //Set ZERO when current turn data is absent. For civil war AI and incomplete log.
-       if(!playerlist[current_player_pos][current_tag_name][current_turn]){
-       playerlist[current_player_pos][current_tag_name][current_turn] = 0;
-       }
-      //Set number
-      array.push(playerlist[current_player_pos][current_tag_name][current_turn]);
-     }
-     //Set temporary array to "playerlist"
-     playerlist[current_player_pos][current_tag_name] = array;
-     }
-    }
    };
  global_playerlist = playerlist;
  global_turn = turn;
@@ -121,7 +81,7 @@ $('li').click(function() {
      var target = taglist[$('li').index(this)];
        for(var item in playerdata){
        var temp = {};
-       temp.name = playerdata[item]['name'];
+       temp.name = playerdata[item].name;
        temp.data = playerdata[item][target];
        dataseries.push(temp);
        }
