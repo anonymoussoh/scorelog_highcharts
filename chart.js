@@ -30,7 +30,11 @@ function change(ev){
 
         //Add player info
         if(data_strip[0] === 'addplayer'){
-            playerdata[data_strip[2]] = {'name' : data_strip[3]};
+            var name = data_strip[3];
+            if(data_strip.length > 4){
+                name = data_strip.slice(3).join(' ');
+            }
+            playerdata[data_strip[2]] = {'name' : name};
         }
 
         //Add tag info
