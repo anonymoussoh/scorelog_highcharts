@@ -1,32 +1,16 @@
 li {
-    padding:1px;
-    border-color:gray;
-    border-width:1px;
-    border-style:solid;
-    }
+    padding-left:2px;
+}
+
 .selected {
-    background-color:silver;
-    }
-#listbox {
-    border-color:gray;
-    border-width:1px;
-    border-style:solid;
-    }
+  background-color:silver;
+}
 
-#graph{
-    }
-
-#float_clear{
-    border-color:gray;
-    border-width:1px;
-    border-style:solid;
-    }
-
-#file_selecter_field{
-    border-color:gray;
-    border-width:1px;
-    border-style:solid;
-    }
+.gray-border {
+  border-color:gray;
+  border-width:1px;
+  border-style:solid;
+}
 
 .row-eq-height {
     display: flex;
