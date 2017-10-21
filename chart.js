@@ -2,7 +2,6 @@
 var title_name;
 var chart1; // globally available
 
-
 function change(ev){
     $('li').removeClass('selected');
 
@@ -82,7 +81,6 @@ function change(ev){
         }
         chart1 = new Highcharts.Chart({
             chart: {
-                height : 20 * $('li').length + 1,
                 borderColor:'gray',
                 borderWidth:1,
                 borderRadius:0,

@@ -5,6 +5,7 @@
   <title>Freeciv Score Viewer</title>
 
   <link rel="stylesheet" type="text/css" href="design.css">
+  <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
 
   <script src="jquery-1.12.0.min.js" type="text/javascript"></script>
   <script src="highcharts.js" type="text/javascript"></script>
@@ -12,53 +13,63 @@
 
  </head>
  <body>
-
-  <div id='frame'>
-   <div id='file_selecter'>
-    <span id='title'>Freeciv Score Viewer</span>
-    <input type="file" onchange="change(event)">｜<span id="file_selector_description">Choose scorelog file.</span>
-   </div>
-  <div id='listbox'>
-   <ul>
-<li>Population</li>
-<li>BNP</li>
-<li>Manufacturing</li>
-<li>Cities</li>
-<li>Technologies</li>
-<li>Military Units</li>
-<li>Settlers</li>
-<li>Wonders</li>
-<li>Research Speed</li>
-<li>Land Area</li>
-<li>Settled Area</li>
-<li>Pollution</li>
-<li>Literacy</li>
-<li>Space ship</li>
-<li>Gold</li>
-<li>Tax Rate</li>
-<li>Science Rate</li>
-<li>Luxuary Rate</li>
-<li>Riots</li>
-<li>Happy Population</li>
-<li>Content Population</li>
-<li>Unhappy Population</li>
-<li>Specialists</li>
-<li>Government Polity</li>
-<li>Corruption</li>
-<li>Score</li>
-<li>Units built</li>
-<li>Units killed</li>
-<li>Units lost</li>
+<div class="container">
+    <div class="row">
+     <div id='file_selecter_field' class="col-xs-12">
+      <h3>Freeciv Score Viewer</h3>
+      <div class="form-group">
+        <input type="file" id="file_selecter">
+      </div>
+     </div>
+    </div>
+<div class="row row-eq-height">
+  <div id='listbox' class="col-xs-2">
+   <ul class="nav nav-pills nav-stacked">
+    <li>Population</li>
+    <li>BNP</li>
+    <li>Manufacturing</li>
+    <li>Cities</li>
+    <li>Technologies</li>
+    <li>Military Units</li>
+    <li>Settlers</li>
+    <li>Wonders</li>
+    <li>Research Speed</li>
+    <li>Land Area</li>
+    <li>Settled Area</li>
+    <li>Pollution</li>
+    <li>Literacy</li>
+    <li>Space ship</li>
+    <li>Gold</li>
+    <li>Tax Rate</li>
+    <li>Science Rate</li>
+    <li>Luxuary Rate</li>
+    <li>Riots</li>
+    <li>Happy Population</li>
+    <li>Content Population</li>
+    <li>Unhappy Population</li>
+    <li>Specialists</li>
+    <li>Government Polity</li>
+    <li>Corruption</li>
+    <li>Score</li>
+    <li>Units built</li>
+    <li>Units killed</li>
+    <li>Units lost</li>
    </ul>
   </div>
-  <div id='graph'>
-
+  <div id='graph' class="col-xs-10">
+  &nbsp;
   </div>
  </div>
- <p id='float_clear'>
- Copyright Soh 2012 This is lisenced by <a href="http://www.kmonos.net/nysl/index.en.html">NYSL</a> Version 0.9982.
- </p>
+ <div class="row">
+   <p id='float_clear' class="col-xs-12">
+   Copyright Soh 2012 This is lisenced by <a href="http://www.kmonos.net/nysl/index.en.html">NYSL</a> Version 0.9982.
+   </p>
+ </div>
+</div>
  </body>
 </html>
-<script src="lang.js" type="text/javascript"></script>
-<script src="chart.js" type="text/javascript"></script>
+
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="lang.js"></script>
+<script src="chart.js"></script>
+<script src="event.js"></script>
